@@ -13,6 +13,12 @@ jobs:
       id-token: write
       contents: read
 
+    env:   # 👈 aquí mapeamos los secrets a variables TF_VAR
+      TF_VAR_resource_group_name: ${{ secrets.TF_VAR_RESOURCE_GROUP_NAME }}
+      TF_VAR_location: ${{ secrets.TF_VAR_LOCATION }}
+      TF_VAR_vnet_name: ${{ secrets.TF_VAR_VNET_NAME }}
+      TF_VAR_subnets: ${{ secrets.TF_VAR_SUBNETS }}
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -37,3 +43,4 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply -auto-approve tfplan
+
